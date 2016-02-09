@@ -1,0 +1,58 @@
+﻿@model HotelReservation.Models.Billing
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Billing</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BarCharge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BarCharge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WifiCharge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WifiCharge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoomCharge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoomCharge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCharge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCharge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Guest.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guest.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BillingID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

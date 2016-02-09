@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Hotel_Reservation_SystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Billing">
+    <Key>
+      <PropertyRef Name="BillingID" />
+    </Key>
+    <Property Name="BillingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GuestIDFK" Type="Int32" />
+    <Property Name="BarCharge" Type="Int32" />
+    <Property Name="WifiCharge" Type="Int32" />
+    <Property Name="RoomCharge" Type="Int32" />
+    <Property Name="TotalCharge" Type="Int32" />
+    <NavigationProperty Name="Guest" Relationship="Self.FK_Billing_Guests" FromRole="Billing" ToRole="Guests" />
+  </EntityType>
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="BookingID" />
+    </Key>
+    <Property Name="BookingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoomIDFK" Type="Int32" />
+    <Property Name="BookingDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BookingFrom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BookingTo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NumOfGuests" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="RoomBooked" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CheckedIn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CheckedOut" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RoomCost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Room" Relationship="Self.FK_Booking_Rooms" FromRole="Booking" ToRole="Rooms" />
+    <NavigationProperty Name="Guests" Relationship="Self.FK_Guests_Booking" FromRole="Booking" ToRole="Guests" />
+  </EntityType>
+  <EntityType Name="Guest">
+    <Key>
+      <PropertyRef Name="GuestID" />
+    </Key>
+    <Property Name="GuestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookingIDFK" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Billings" Relationship="Self.FK_Billing_Guests" FromRole="Guests" ToRole="Billing" />
+    <NavigationProperty Name="Booking" Relationship="Self.FK_Guests_Booking" FromRole="Guests" ToRole="Booking" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="RoomID" />
+    </Key>
+    <Property Name="RoomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SingleBeds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DoubleBeds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Tarrif1Person" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Tarrif2People" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TarrifExtraPerson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_Rooms" FromRole="Rooms" ToRole="Booking" />
+  </EntityType>
+  <Association Name="FK_Billing_Guests">
+    <End Role="Guests" Type="Self.Guest" Multiplicity="0..1" />
+    <End Role="Billing" Type="Self.Billing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guests">
+        <PropertyRef Name="GuestID" />
+      </Principal>
+      <Dependent Role="Billing">
+        <PropertyRef Name="GuestIDFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Booking_Rooms">
+    <End Role="Rooms" Type="Self.Room" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rooms">
+        <PropertyRef Name="RoomID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="RoomIDFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Guests_Booking">
+    <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
+    <End Role="Guests" Type="Self.Guest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="BookingID" />
+      </Principal>
+      <Dependent Role="Guests">
+        <PropertyRef Name="BookingIDFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Hotel_Reservation_SystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Billings" EntityType="Self.Billing" />
+    <EntitySet Name="Bookings" EntityType="Self.Booking" />
+    <EntitySet Name="Guests" EntityType="Self.Guest" />
+    <EntitySet Name="Rooms" EntityType="Self.Room" />
+    <AssociationSet Name="FK_Billing_Guests" Association="Self.FK_Billing_Guests">
+      <End Role="Guests" EntitySet="Guests" />
+      <End Role="Billing" EntitySet="Billings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Booking_Rooms" Association="Self.FK_Booking_Rooms">
+      <End Role="Rooms" EntitySet="Rooms" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Guests_Booking" Association="Self.FK_Guests_Booking">
+      <End Role="Booking" EntitySet="Bookings" />
+      <End Role="Guests" EntitySet="Guests" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

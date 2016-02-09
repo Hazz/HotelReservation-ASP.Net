@@ -1,0 +1,70 @@
+﻿body {
+    padding-top:100px;
+    padding-bottom: 100px;
+}
+/*Changes Menubar background colour*/
+.navbar-inverse {
+    background-color: grey !important;
+
+}
+/*Changes Menubar title text colour*/
+.navbar-inverse .navbar-brand {
+  color: black !important;
+}
+/*text link colour on menu bar*/
+.nav.navbar-nav li a {
+    color: whitesmoke !important;
+ }
+/* text link colour in menubar on hover*/
+.nav.navbar-nav a:hover {
+ color: Blue !important;
+}
+#footer {
+    background: #e9967a !important;
+    padding: 1px 1px;
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    float: left;
+}
+#MenuBar {
+    color: #eee !important;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+#RoomTable {
+    float: left;
+    color: red;
+    clear: left
+}
+#RoomCosts {
+    float: right;
+    width: 500px;
+    clear: right;
+
+}
+#GuestDetail {
+    float: right;
+    clear: right;
+}
+#RoomDetails {
+    float: left;
+   
+}

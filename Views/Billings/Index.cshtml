@@ -1,0 +1,104 @@
+﻿@model IEnumerable<HotelReservation.Models.Billing>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Booking.BookingID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Booking.RoomBooked)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Booking.NumOfGuests)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Booking.RoomCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Booking.CheckedIn)
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Booking.CheckedOut)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Booking.BookingID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Booking.RoomBooked)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Booking.NumOfGuests)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Booking.RoomCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Booking.CheckedIn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Booking.CheckedOut)
+            </td>*@
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.BillingID }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.BillingID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.BillingID })
+                </td>
+        @*</tr>
+    }
+
+</table>
+
+
+<div class="row" style='float: right; width: 600px;'>
+    <div class="col-md-4 col-md-offset-3">
+        <h2>Charges</h2>
+        <form method="POST">
+            <div asp-validation-summary="ValidationSummary.ModelOnly"></div>
+
+            <div class="form-group">
+                <label asp-for="BarCharge">Bar Charge</label>
+                <input asp-for="BarCharge" class="form-control" />
+                <span asp-validation-for="BarCharge" class="text-muted"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="WifiCharge">Wifi Charge</label>
+                <input asp-for="WifiCharge" class="form-control"/>
+                <span asp-validation-for="WifiCharge" class="text-muted"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomCharge">Room Charge</label>
+                <input asp-for="RoomCharge" class="form-control" />
+                <span asp-validation-for="RoomCharge" class="text-muted"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Calculate Total" class="btn btn-success" />
+                <a asp-controller="App" asp-action="Index" class="btn btn-default">Cancel</a>
+
+            </div>
+        </form>
+
+    </div>
+</div>*@

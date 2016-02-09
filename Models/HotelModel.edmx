@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Hotel_Reservation_SystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Billing">
+          <Key>
+            <PropertyRef Name="BillingID" />
+          </Key>
+          <Property Name="BillingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuestIDFK" Type="int" />
+          <Property Name="BarCharge" Type="int" />
+          <Property Name="WifiCharge" Type="int" />
+          <Property Name="RoomCharge" Type="int" />
+          <Property Name="TotalCharge" Type="int" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="BookingID" />
+          </Key>
+          <Property Name="BookingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomIDFK" Type="int" />
+          <Property Name="BookingDate" Type="nvarchar(max)" />
+          <Property Name="BookingFrom" Type="nvarchar(max)" />
+          <Property Name="BookingTo" Type="nvarchar(max)" />
+          <Property Name="NumOfGuests" Type="nvarchar(max)" />
+          <Property Name="RoomBooked" Type="nvarchar(max)" />
+          <Property Name="CheckedIn" Type="nvarchar(max)" />
+          <Property Name="CheckedOut" Type="nvarchar(max)" />
+          <Property Name="RoomCost" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Guests">
+          <Key>
+            <PropertyRef Name="GuestID" />
+          </Key>
+          <Property Name="GuestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingIDFK" Type="int" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Rooms">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SingleBeds" Type="nvarchar(max)" />
+          <Property Name="DoubleBeds" Type="nvarchar(max)" />
+          <Property Name="Tarrif1Person" Type="nvarchar(max)" />
+          <Property Name="Tarrif2People" Type="nvarchar(max)" />
+          <Property Name="TarrifExtraPerson" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Billing_Guests">
+          <End Role="Guests" Type="Self.Guests" Multiplicity="0..1" />
+          <End Role="Billing" Type="Self.Billing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guests">
+              <PropertyRef Name="GuestID" />
+            </Principal>
+            <Dependent Role="Billing">
+              <PropertyRef Name="GuestIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_Rooms">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="RoomIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Guests_Booking">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
+          <End Role="Guests" Type="Self.Guests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="Guests">
+              <PropertyRef Name="BookingIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Hotel_Reservation_SystemModelStoreContainer">
+          <EntitySet Name="Billing" EntityType="Self.Billing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Guests" EntityType="Self.Guests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Billing_Guests" Association="Self.FK_Billing_Guests">
+            <End Role="Guests" EntitySet="Guests" />
+            <End Role="Billing" EntitySet="Billing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_Rooms" Association="Self.FK_Booking_Rooms">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Guests_Booking" Association="Self.FK_Guests_Booking">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="Guests" EntitySet="Guests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Hotel_Reservation_SystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Billing">
+          <Key>
+            <PropertyRef Name="BillingID" />
+          </Key>
+          <Property Name="BillingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuestIDFK" Type="Int32" />
+          <Property Name="BarCharge" Type="Int32" />
+          <Property Name="WifiCharge" Type="Int32" />
+          <Property Name="RoomCharge" Type="Int32" />
+          <Property Name="TotalCharge" Type="Int32" />
+          <NavigationProperty Name="Guest" Relationship="Self.FK_Billing_Guests" FromRole="Billing" ToRole="Guests" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="BookingID" />
+          </Key>
+          <Property Name="BookingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomIDFK" Type="Int32" />
+          <Property Name="BookingDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BookingFrom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BookingTo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumOfGuests" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RoomBooked" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CheckedIn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CheckedOut" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoomCost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Room" Relationship="Self.FK_Booking_Rooms" FromRole="Booking" ToRole="Rooms" />
+          <NavigationProperty Name="Guests" Relationship="Self.FK_Guests_Booking" FromRole="Booking" ToRole="Guests" />
+        </EntityType>
+        <EntityType Name="Guest">
+          <Key>
+            <PropertyRef Name="GuestID" />
+          </Key>
+          <Property Name="GuestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingIDFK" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Billings" Relationship="Self.FK_Billing_Guests" FromRole="Guests" ToRole="Billing" />
+          <NavigationProperty Name="Booking" Relationship="Self.FK_Guests_Booking" FromRole="Guests" ToRole="Booking" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SingleBeds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoubleBeds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tarrif1Person" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tarrif2People" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TarrifExtraPerson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_Rooms" FromRole="Rooms" ToRole="Booking" />
+        </EntityType>
+        <Association Name="FK_Billing_Guests">
+          <End Role="Guests" Type="Self.Guest" Multiplicity="0..1" />
+          <End Role="Billing" Type="Self.Billing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guests">
+              <PropertyRef Name="GuestID" />
+            </Principal>
+            <Dependent Role="Billing">
+              <PropertyRef Name="GuestIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_Rooms">
+          <End Role="Rooms" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="RoomIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Guests_Booking">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
+          <End Role="Guests" Type="Self.Guest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="Guests">
+              <PropertyRef Name="BookingIDFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Hotel_Reservation_SystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Billings" EntityType="Self.Billing" />
+          <EntitySet Name="Bookings" EntityType="Self.Booking" />
+          <EntitySet Name="Guests" EntityType="Self.Guest" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <AssociationSet Name="FK_Billing_Guests" Association="Self.FK_Billing_Guests">
+            <End Role="Guests" EntitySet="Guests" />
+            <End Role="Billing" EntitySet="Billings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_Rooms" Association="Self.FK_Booking_Rooms">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Guests_Booking" Association="Self.FK_Guests_Booking">
+            <End Role="Booking" EntitySet="Bookings" />
+            <End Role="Guests" EntitySet="Guests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Hotel_Reservation_SystemModelStoreContainer" CdmEntityContainer="Hotel_Reservation_SystemEntities">
+          <EntitySetMapping Name="Billings">
+            <EntityTypeMapping TypeName="Hotel_Reservation_SystemModel.Billing">
+              <MappingFragment StoreEntitySet="Billing">
+                <ScalarProperty Name="BillingID" ColumnName="BillingID" />
+                <ScalarProperty Name="GuestIDFK" ColumnName="GuestIDFK" />
+                <ScalarProperty Name="BarCharge" ColumnName="BarCharge" />
+                <ScalarProperty Name="WifiCharge" ColumnName="WifiCharge" />
+                <ScalarProperty Name="RoomCharge" ColumnName="RoomCharge" />
+                <ScalarProperty Name="TotalCharge" ColumnName="TotalCharge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bookings">
+            <EntityTypeMapping TypeName="Hotel_Reservation_SystemModel.Booking">
+              <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="RoomIDFK" ColumnName="RoomIDFK" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="BookingFrom" ColumnName="BookingFrom" />
+                <ScalarProperty Name="BookingTo" ColumnName="BookingTo" />
+                <ScalarProperty Name="NumOfGuests" ColumnName="NumOfGuests" />
+                <ScalarProperty Name="RoomBooked" ColumnName="RoomBooked" />
+                <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
+                <ScalarProperty Name="CheckedOut" ColumnName="CheckedOut" />
+                <ScalarProperty Name="RoomCost" ColumnName="RoomCost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Guests">
+            <EntityTypeMapping TypeName="Hotel_Reservation_SystemModel.Guest">
+              <MappingFragment StoreEntitySet="Guests">
+                <ScalarProperty Name="GuestID" ColumnName="GuestID" />
+                <ScalarProperty Name="BookingIDFK" ColumnName="BookingIDFK" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="Hotel_Reservation_SystemModel.Room">
+              <MappingFragment StoreEntitySet="Rooms">
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="SingleBeds" ColumnName="SingleBeds" />
+                <ScalarProperty Name="DoubleBeds" ColumnName="DoubleBeds" />
+                <ScalarProperty Name="Tarrif1Person" ColumnName="Tarrif1Person" />
+                <ScalarProperty Name="Tarrif2People" ColumnName="Tarrif2People" />
+                <ScalarProperty Name="TarrifExtraPerson" ColumnName="TarrifExtraPerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

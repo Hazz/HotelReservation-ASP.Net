@@ -1,0 +1,90 @@
+﻿@model HotelReservation.Models.Booking
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumOfGuests)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumOfGuests)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoomBooked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoomBooked)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckedIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckedIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckedOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckedOut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoomCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoomCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Room.SingleBeds)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room.SingleBeds)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BookingID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

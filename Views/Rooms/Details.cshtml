@@ -1,0 +1,58 @@
+﻿@model HotelReservation.Models.Room
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Room</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SingleBeds)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SingleBeds)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DoubleBeds)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DoubleBeds)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tarrif1Person)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tarrif1Person)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tarrif2People)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tarrif2People)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TarrifExtraPerson)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TarrifExtraPerson)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RoomID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

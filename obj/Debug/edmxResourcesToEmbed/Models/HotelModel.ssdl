@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Hotel_Reservation_SystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Billing">
+    <Key>
+      <PropertyRef Name="BillingID" />
+    </Key>
+    <Property Name="BillingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GuestIDFK" Type="int" />
+    <Property Name="BarCharge" Type="int" />
+    <Property Name="WifiCharge" Type="int" />
+    <Property Name="RoomCharge" Type="int" />
+    <Property Name="TotalCharge" Type="int" />
+  </EntityType>
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="BookingID" />
+    </Key>
+    <Property Name="BookingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoomIDFK" Type="int" />
+    <Property Name="BookingDate" Type="nvarchar(max)" />
+    <Property Name="BookingFrom" Type="nvarchar(max)" />
+    <Property Name="BookingTo" Type="nvarchar(max)" />
+    <Property Name="NumOfGuests" Type="nvarchar(max)" />
+    <Property Name="RoomBooked" Type="nvarchar(max)" />
+    <Property Name="CheckedIn" Type="nvarchar(max)" />
+    <Property Name="CheckedOut" Type="nvarchar(max)" />
+    <Property Name="RoomCost" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Guests">
+    <Key>
+      <PropertyRef Name="GuestID" />
+    </Key>
+    <Property Name="GuestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookingIDFK" Type="int" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Rooms">
+    <Key>
+      <PropertyRef Name="RoomID" />
+    </Key>
+    <Property Name="RoomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SingleBeds" Type="nvarchar(max)" />
+    <Property Name="DoubleBeds" Type="nvarchar(max)" />
+    <Property Name="Tarrif1Person" Type="nvarchar(max)" />
+    <Property Name="Tarrif2People" Type="nvarchar(max)" />
+    <Property Name="TarrifExtraPerson" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_Billing_Guests">
+    <End Role="Guests" Type="Self.Guests" Multiplicity="0..1" />
+    <End Role="Billing" Type="Self.Billing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guests">
+        <PropertyRef Name="GuestID" />
+      </Principal>
+      <Dependent Role="Billing">
+        <PropertyRef Name="GuestIDFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Booking_Rooms">
+    <End Role="Rooms" Type="Self.Rooms" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rooms">
+        <PropertyRef Name="RoomID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="RoomIDFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Guests_Booking">
+    <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
+    <End Role="Guests" Type="Self.Guests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="BookingID" />
+      </Principal>
+      <Dependent Role="Guests">
+        <PropertyRef Name="BookingIDFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Hotel_Reservation_SystemModelStoreContainer">
+    <EntitySet Name="Billing" EntityType="Self.Billing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Guests" EntityType="Self.Guests" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Billing_Guests" Association="Self.FK_Billing_Guests">
+      <End Role="Guests" EntitySet="Guests" />
+      <End Role="Billing" EntitySet="Billing" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Booking_Rooms" Association="Self.FK_Booking_Rooms">
+      <End Role="Rooms" EntitySet="Rooms" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Guests_Booking" Association="Self.FK_Guests_Booking">
+      <End Role="Booking" EntitySet="Booking" />
+      <End Role="Guests" EntitySet="Guests" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
